@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 function About() {
   return (
-    <p>
+    <p className='meng'>
       about
       <Outlet />
     </p>
