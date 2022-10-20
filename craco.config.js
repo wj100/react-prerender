@@ -58,7 +58,7 @@ module.exports = {
             javascriptEnabled: true,
             //配置全局less 变量，不需要在使用的地方导入了
             globalVars: {
-              hack: `true; @import '~@/assets/css/variable.less';`,
+              hack: `true; @import '~@/assets/css/global.less';`,
             },
           },
         },

@@ -1,0 +1,28 @@
+:root {
+    --scrollbar: 0px;
+}
+.g-content{
+    width: 1200px;
+}
+.g-min-h-520{
+    min-height: 520px;
+}
+.g-header-nav {
+    margin-left: 100px;
+
+    &>span {
+        margin-right: 67px;
+        @apply hover:cursor-pointer active:opacity-80;
+    }
+    .g-header-nav-menu {
+        width: 197px;
+        height: 171px;
+        top: 100px;
+        left: 32px;
+
+        span {
+            background-size: 50%;
+            @apply h-10 w-full hover:bg-blue-light hover:cursor-pointer bg-no-repeat;
+        }
+    }
+}
