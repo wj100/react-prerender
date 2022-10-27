@@ -1,0 +1,70 @@
+cache:
+    paths:
+        - node_modules/
+stages:
+- build
+- deploy
+- publish
+
+# 编译测试环境
+build-test: # 定义打包 job，用 tags 指定了用哪个机器
+  stage: build # 指定哪个 stage
+  script: # 要跑的脚本，每个脚本执行结果不为 0 就中断
+  - pwd
+  - npm i
+  - npm run build
+  tags: # tags 指定用 runner
+  - qiye-online-runner # 测试打包机 10.120.100.67 上的 runner
+#  when: manual # 手动跑，这个可以换成自动跑，配合 only 指定哪个分支，这个分支有 commit 自动执行这个 job
+  artifacts:
+    paths:
+    - build
+    expire_in: 1 days
+  only: # 指定特定分支
+  - master
+  - dev
+  - /^feature\/.*$/
+
+# 部署杭州测试环境
+deploy-test:
+  stage: deploy
+  script:
+  - pwd
+  - mkdir -p /data/factory.163.com/new/
+  - rsync -av build/ /data/factory.163.com/
+  # - sh /home/webedit/qa/tomcat_restart.sh #重启tomcat
+  tags:
+  - qiye-test-2-hz
+  # environment:
+  #   name: test
+  only:
+  - master
+  - dev
+  - /^feature\/.*$/
+  
+  #官网提交发布库
+publish-online:
+  stage: publish 
+  script:
+    - pwd
+    - currentPath=`pwd`
+    - commit_msg=$(git log -n 1 --pretty=format:"%h|%s|%cn|%cd" --date=short)
+    - cd /home/appops/pre-publish/
+    - if [ ! -d "factory" ];then
+    - git clone ssh://git@g.hz.netease.com:22222/qiye/release/factory.git;
+    - cd factory
+    - git config user.email "qiye_deploy@corp.netease.com";
+    - git config user.name "qiye_deploy";
+    - fi
+    - cd factory/
+    - git pull || echo "pull fail"
+    - rsync -av  --exclude '.git'  $currentPath/dist/ /home/appops/pre-publish/factory/
+    - git add -A && echo "add to git" && git commit -m "$commit_msg" && git push origin master
+  tags:
+    - qiye-online-runner #新deploy-1打包机 deploy-1-qy-entmail-virt6.dg.163.org
+  when: manual
+  # environment:
+  #   name: online
+  only:
+    - master
+

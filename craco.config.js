@@ -2,6 +2,7 @@ const path = require('path');
 const CracoLessPlugin = require('craco-less');
 const PrerenderSPAPlugin = require('@dreysolano/prerender-spa-plugin');
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
+const resolveUrlLoader = require('craco-resolve-url-loader');
 
 module.exports = {
   style: {
@@ -31,7 +32,7 @@ module.exports = {
       // 预渲染
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, './build'),
-        routes: ['/', '/about', '/about/a'],
+        routes: ['/', '/products','/products/fashion', '/products/outdoor', '/products/toys', '/about', '/about/a'],
         renderer: new Renderer({
           timeout: 0,
           maxConcurrentRoutes: 0,
@@ -54,11 +55,12 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
+            relativeUrls: false, // 是否开启相对路径
             modifyVars: { '@primary-color': '#5e79ff' },
             javascriptEnabled: true,
-            //配置全局less 变量，不需要在使用的地方导入了
+            //配置全局less 不需要在使用的地方导入了
             globalVars: {
-              hack: `true; @import '~@/assets/css/variable.less';`,
+              hack: `true; @import '~@/assets/css/global.less';`,
             },
           },
         },

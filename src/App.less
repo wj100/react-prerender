@@ -1,2 +1,9 @@
 @import '~antd/dist/antd.less';
-@import './assets/css/index.less';
+// @import './assets/css/normalize.less';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 覆盖antd样式干扰 */
+a:hover{
+    color: inherit;
+}

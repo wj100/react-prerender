@@ -1,0 +1,101 @@
+
+    
+    .g-banner{
+        padding-top: 116px;
+        background-position: center;
+        .g-banner-desc{
+            width: 536px;
+        }
+    }
+    .g-why-choose,.g-home-weHave{
+        min-height: 653px;
+    }
+    .g-why-choose-content{
+        width: 1033px;
+        height: 280px;
+        margin-top: 69px;
+        .g-why-choose-content-icons{
+            // display: flex;
+            &>img{
+                width: 210px;
+                height: 210px;
+            }
+            &>p{
+                margin-top: 22px;
+            }
+            &:nth-of-type(1)>p{
+                width: 253px;
+            }
+            &:nth-of-type(2)>p{
+                width: 268px;
+            }
+            &:nth-of-type(3)>p{
+                width: 298px;
+            }
+        }
+        // .g-why-choose-content-icons:nth-of-type(1){
+        //     p{
+        //         width: 253px;
+        //     }
+        // }
+        // .g-why-choose-content-icons:nth-of-type(2){
+        //     p{
+        //         width: 268px;
+        //     }
+        // }
+        // .g-why-choose-content-icons:nth-of-type(3){
+        //     p{
+        //         width: 298px;
+        //     }
+        // }
+    }
+    .g-home-block{
+        height: 520px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center ;
+        .g-home-block-desc{
+            width: 443px;
+        }
+        &:nth-of-type(2n+1){
+            .g-home-block-desc{
+                width: 407px;
+            }
+        }
+        &>.g-content{
+            &>img{
+                width: 700px;
+                height: 366px;
+            }
+            &>div{
+               p:nth-of-type(2){
+                margin-top: 10px;
+               }
+            }
+        }
+    }
+    .g-home-weHave{
+        min-height: 870px;
+    }
+    .g-home-weHave-box{
+        @apply bg-black-b;
+        width: 380px;
+        height: 568px;
+        img{
+            width: 380px;
+            height: 330px;
+        }
+    }
+    .g-home-weHave-icon{
+        width: 31px;
+        height: 33px;
+        margin-top: 62px;
+        margin-bottom: 10px;
+    }
+    .g-home-about{
+        height: 690px;
+        .g-home-about-text{
+            width: 504px;
+        }
+    }

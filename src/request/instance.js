@@ -1,6 +1,6 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
-const baseUrl = 'https://entry.qiye.163.com'
+const baseUrl = 'https://factory-scm.lx.netease.com'
 const instance = axios.create({
   baseURL: baseUrl,
   timeout: 8 * 1000
